@@ -689,15 +689,7 @@ export class SabActorSheet extends ActorSheet {
   }
 
   _onHealthChange(ev) {
-    let currentHealth = parseInt(ev.target.value, 10);
-    if (currentHealth === 0) {
-      let oldHealth = this.actor.system.health.old;
-      ChatMessage.create({
-        speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-        content: game.i18n.localize(`SAB.Battlescar.${oldHealth}.message`),
-        flavor: game.i18n.localize(`SAB.Battlescar.${oldHealth}.flavor`)
-      });
-    }
+    // TODO: Fix health change scars logic
   }
 
   _checkInvSlots() {
