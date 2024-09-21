@@ -137,6 +137,19 @@ export class SabActorSheet extends ActorSheet {
       }
     }
 
+    // Sort items based on their sort value
+    const sortItems = (a, b) => {
+      if (a.sort === 0) return 1;
+      if (b.sort === 0) return -1;
+
+      return 0;
+    };
+
+    // Apply sorting to gear, features, and spells
+    gear.sort(sortItems);
+    features.sort(sortItems);
+    spells.sort(sortItems);
+
     // Assign and return
     context.gear = gear;
     context.features = features;
@@ -173,6 +186,7 @@ export class SabActorSheet extends ActorSheet {
     html.on("click", ".item-delete", ev => {
       const li = $(ev.currentTarget).parents(".item");
       const item = this.actor.items.get(li.data("itemId"));
+
       item.delete();
       li.slideUp(200, () => this.render(false));
     });
@@ -264,13 +278,31 @@ export class SabActorSheet extends ActorSheet {
     // Grab any data associated with this control.
     const data = foundry.utils.duplicate(header.dataset);
     // Initialize a default name.
-    const name = `New ${type.capitalize()}`;
+    let name = "";
+
+    switch (type) {
+      case "item":
+        name = `${game.i18n.localize("SAB.actions.new-item")}`;
+        break;
+      case "feature":
+        name = `${game.i18n.localize("SAB.actions.new-ability")}`;
+        break;
+      case "spell":
+        name = `${game.i18n.localize("SAB.actions.new-spell")}`;
+        break;
+    }
+
+    if (data.itemType === "fatigue") {
+      name = game.i18n.localize("SAB.item.fatigue.name");
+    }
+
     // Prepare the item object.
     const itemData = {
       name: name,
       type: type,
       system: data
     };
+
     // Remove the type from the dataset since it's in the itemData.type prop.
     delete itemData.system.type;
 
@@ -480,68 +512,52 @@ export class SabActorSheet extends ActorSheet {
   }
 
   async _getPowerLevel(maxBasePower) {
-    let powerLevel = await new Promise(resolve => {
-      const div = document.createElement("div");
-      div.classList.add("sheet-modal");
+    const items = this.actor.items.filter(item => item.type === "item");
+    const totalWeight = items.reduce((sum, item) => sum + (item.system.weight || 0), 0);
+    let availableSlots = this.actor.system.attributes.invSlots.value - totalWeight;
+    availableSlots = Math.min(availableSlots, 5);
 
-      const powerLevelContainer = document.createElement("div");
-      powerLevelContainer.classList.add("power-level-container");
-
-      const label = document.createElement("label");
-      label.setAttribute("for", "powerLevel");
-      label.textContent = `${game.i18n.localize("SAB.item.spell.power-level")}: `;
-      powerLevelContainer.appendChild(label);
-
-      const select = document.createElement("select");
-      select.id = "powerLevel";
-      select.name = "powerLevel";
-      select.required = true;
-
-      const items = this.actor.items.filter(item => item.type === "item");
-      const totalWeight = items.reduce((sum, item) => sum + (item.system.weight || 0), 0);
-      let availableSlots = this.actor.system.attributes.invSlots.value - totalWeight;
-      availableSlots = Math.min(availableSlots, 5);
-
-      if (availableSlots === 0) {
-        select.disabled = true;
-        const option = document.createElement("option");
-        option.value = 0;
-        option.textContent = game.i18n.localize("SAB.item.spell.no-slots");
-        select.appendChild(option);
-      } else {
-        for (let i = 1; i <= availableSlots; i++) {
-          const option = document.createElement("option");
-          option.value = i;
-          option.textContent = i;
-          select.appendChild(option);
-        }
+    let options = "";
+    if (availableSlots === 0) {
+      options = `<option value="0">${game.i18n.localize("SAB.item.spell.no-slots")}</option>`;
+    } else {
+      for (let i = 1; i <= availableSlots; i++) {
+        options += `<option value="${i}">${i}</option>`;
       }
+    }
 
-      powerLevelContainer.appendChild(select);
-      div.appendChild(powerLevelContainer);
-
-      const divContainer = document.createElement("div");
-      divContainer.appendChild(div);
-      const content = divContainer.innerHTML;
-
+    return new Promise(resolve => {
       new Dialog({
         title: game.i18n.localize("SAB.item.spell.pl-dialog"),
-        content: content,
+        content: `
+          <form class="sheet-modal">
+            <div>
+              <label for="powerLevel">${game.i18n.localize("SAB.item.spell.power-level")}: </label>
+              <select id="powerLevel" name="powerLevel" ${availableSlots === 0 && "disabled"} required>
+                ${options}
+              </select>
+            </div>
+          </form>
+        `,
         buttons: {
           ok: {
+            icon: '<i class="fas fa-check"></i>',
             label: game.i18n.localize("SAB.actions.cast-spell"),
             callback: html => {
-              const select = html.find("#powerLevel")[0];
-              const power = parseInt(select.value);
-
+              const form = html.find("form")[0];
+              const power = parseInt(form.powerLevel.value);
               resolve(power);
             }
           }
         },
-        default: "ok"
+        default: "ok",
+        render: html => {
+          if (availableSlots === 0) {
+            html.find('button[data-button="ok"]').prop("disabled", true);
+          }
+        }
       }).render(true);
     });
-    return powerLevel;
   }
 
   async _checkFatigue(rollDice) {
@@ -550,8 +566,8 @@ export class SabActorSheet extends ActorSheet {
       name: game.i18n.localize("SAB.item.fatigue.name"),
       type: "item",
       system: {
-        description: game.i18n.localize("SAB.item.fatigue.name"),
-        weight: 1
+        weight: 1,
+        itemType: "fatigue"
       }
     };
 
@@ -562,6 +578,7 @@ export class SabActorSheet extends ActorSheet {
         totalFatigue++;
       } else break;
     }
+
     if (totalFatigue > 0) {
       ChatMessage.create({
         speaker: ChatMessage.getSpeaker({ actor: this.actor }),
@@ -596,13 +613,14 @@ export class SabActorSheet extends ActorSheet {
     let currentSlots = this.actor.system.attributes.invSlots.value;
     let items = this.actor.items.filter(item => item.type === "item");
     let totalWeight = items.reduce((sum, item) => sum + (item.system.weight || 0), 0);
+
     if (totalWeight >= currentSlots) {
       ChatMessage.create({
         speaker: ChatMessage.getSpeaker({ actor: this.actor }),
         content: game.i18n.localize("SAB.encumbrance.overburdened")
       });
-      this.actor.update({"system.health.value": 0 });
     }
+
     return currentSlots-totalWeight;
   }
 

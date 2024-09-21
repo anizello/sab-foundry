@@ -546,6 +546,11 @@
 .spellburn-and-battlescars .new-ability-container, .spellburn-and-battlescars .new-item-container {
   margin-top: 32px;
 }
+.spellburn-and-battlescars .new-item-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
 .spellburn-and-battlescars .gold-container {
   display: flex;
   align-items: center;
@@ -669,6 +674,13 @@
 .spellburn-and-battlescars .items-list .item-name h3 span, .spellburn-and-battlescars .items-list .item-name h4 span {
   font-family: "Alegreya", serif;
 }
+.spellburn-and-battlescars .items-list .item-name .item-info {
+  width: 32px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .spellburn-and-battlescars .items-list .item-description {
   flex: 1;
   width: 70%;
@@ -738,6 +750,18 @@
 .spellburn-and-battlescars .items-list .items-header .item-name {
   padding-left: 5px;
   text-align: left;
+}
+.spellburn-and-battlescars .item-type-buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+}
+.spellburn-and-battlescars .item-type-buttons button {
+  height: 38px;
+}
+.spellburn-and-battlescars .item-type-buttons button.active, .spellburn-and-battlescars .item-type-buttons button:hover {
+  background-color: #eae9e3;
+  color: #191813;
 }
 .spellburn-and-battlescars .effects .item .effect-source,
 .spellburn-and-battlescars .effects .item .effect-duration,

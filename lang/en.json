@@ -43,11 +43,11 @@
         },
         "origin": {
           "label": "Origin",
-          "question-placeholder": "Insert your Archetype's Origin question here.",
+          "question-placeholder": "Insert your Archetype's Origin question here",
           "answer-title": "Answer",
-          "answer-title-placeholder": "Insert the title of the answer here.",
+          "answer-title-placeholder": "Insert the title of the answer here",
           "answer-description": "Ability",
-          "answer-description-placeholder": "Insert the description of the Ability here."
+          "answer-description-placeholder": "Insert the description of the Ability here"
         },
         "short-rest": "Short Rest",
         "long-rest": "Long Rest",
@@ -71,7 +71,8 @@
       "new-ability": "New Ability",
       "new-item": "New Item",
       "new-spell": "New Spell",
-      "cast-spell": "Cast Spell"
+      "cast-spell": "Cast Spell",
+      "new-fatigue": "Add Fatigue"
     },
     "encumbrance": {
       "name": "Encumbrance",
@@ -132,10 +133,12 @@
         "name-spell-placeholder": "Spell name",
         "quantity": "Quantity",
         "weight": "Slots",
-        "description-placeholder": "Item's description",
+        "description-placeholder": "Description",
         "die-size": "Die Size",
         "die-size-placeholder": "Select Die Size",
-        "roll-modifier": "Roll Modifier"
+        "roll-modifier": "Bonus Damage",
+        "armor-value": "Armor Value",
+        "dice-bonus-placeholder": "+d6+d8"
       },
       "roll-formula": "Roll Formula",
       "damage": "Damage",
@@ -149,6 +152,18 @@
       "fatigue": {
         "name": "Fatigue",
         "msg": "Fatigue increased by"
+      },
+      "type": {
+        "weapon": "Weapon",
+        "armor": "Armor",
+        "misc": "Misc",
+        "spell": "Spell",
+        "relic": "Relic"
+      },
+      "weight": {
+        "light": "Light (0)",
+        "normal": "Normal (1)",
+        "bulky": "Bulky (2)"
       }
     },
     "Effect": {

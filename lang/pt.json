@@ -43,11 +43,11 @@
         },
         "origin": {
           "label": "Origem",
-          "question-placeholder": "Insira a pergunta da Origem do seu Arquétipo aqui.",
+          "question-placeholder": "Insira a pergunta da Origem do seu Arquétipo aqui",
           "answer-title": "Resposta",
-          "answer-title-placeholder": "Insira o título da resposta.",
+          "answer-title-placeholder": "Insira o título da resposta aqui",
           "answer-description": "Habilidade",
-          "answer-description-placeholder": "Insira a Habilidade da Origem do seu Arquétipo aqui."
+          "answer-description-placeholder": "Insira a Habilidade da Origem do seu Arquétipo aqui"
         },
         "short-rest": "Descanso Curto",
         "long-rest": "Descanso Longo",
@@ -71,7 +71,8 @@
       "new-ability": "Nova Habilidade",
       "new-item": "Novo Item",
       "new-spell": "Nova Magia",
-      "cast-spell": "Conjurar Magia"
+      "cast-spell": "Conjurar Magia",
+      "new-fatigue": "Adicionar Fadiga"
     },
     "encumbrance": {
       "name": "Carga",
@@ -132,10 +133,12 @@
         "name-spell-placeholder": "Nome da Magia",
         "quantity": "Quantidade",
         "weight": "Espaços",
-        "description-placeholder": "Descrição do Item",
+        "description-placeholder": "Descrição",
         "die-size": "Dado",
         "die-size-placeholder": "Selecione o Dado",
-        "roll-modifier": "Modificador"
+        "roll-modifier": "Dano Bônus",
+        "armor-value": "Valor de Armadura",
+        "dice-bonus-placeholder": "+d6+d8"
       },
       "roll-formula": "Fórmula de Rolagem",
       "damage": "Dano",
@@ -149,6 +152,18 @@
       "fatigue": {
         "name": "Fadiga",
         "msg": "Fadiga aumentada por"
+      },
+      "type": {
+        "weapon": "Arma",
+        "armor": "Armadura",
+        "misc": "Diversos",
+        "spell": "Magia",
+        "relic": "Relíquia"
+      },
+      "weight": {
+        "light": "Leve (0)",
+        "normal": "Normal (1)",
+        "bulky": "Volumoso (2)"
       }
     },
     "Effect": {

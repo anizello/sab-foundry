@@ -90,5 +90,16 @@ export class SabItemSheet extends ItemSheet {
     html.on("click", ".effect-control", ev =>
       onManageActiveEffect(ev, this.item)
     );
+
+    // Item type button logic
+    html.find(".item-type-button").click(ev => {
+      const button = ev.currentTarget;
+      const itemType = button.dataset.itemType;
+
+      this.item.update({"system.itemType": itemType});
+
+      html.find(".item-type-button").removeClass("active");
+      button.classList.add("active");
+    });
   }
 }
