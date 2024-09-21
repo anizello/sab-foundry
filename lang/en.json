@@ -51,6 +51,8 @@
         },
         "short-rest": "Short Rest",
         "long-rest": "Long Rest",
+        "long-rest-description": "Choose which Attribute to recover.",
+        "full-rest": "Full Rest",
         "advance": "Advance",
         "attribute": {
           "label": "Attribute",
@@ -85,7 +87,10 @@
       "critical-success": "Critical Success! LUCK has increased.",
       "save-success": "Success!",
       "save-failure": "Failure!",
-      "short-rest": "You have gained <strong>{value}</strong> HP from a Short Rest.",
+      "short-rest": "You've recovered {value} HP from a Short Rest.",
+      "long-rest": "You've recovered {value} {attribute} from a Long Rest. You also recovered all HP and removed all Fatigue.",
+      "long-rest-no-attribute-recovery": "You've recovered all HP and removed all Fatigue.",
+      "full-rest": "You've recovered all HP, Attributes and removed all Fatigue.",
       "deprived": "A Deprived character cannot recover HP or Attributes."
     },
     "rollNewChar": "Roll new Character",

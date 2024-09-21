@@ -20,7 +20,7 @@
     background-color: $c-critical-failure-light;
   }
 
-  &.critical-success {
+  &.critical-success, &.long-rest, &.full-rest {
     color: $c-critical-success-dark;
     background-color: $c-critical-success-light;
   }

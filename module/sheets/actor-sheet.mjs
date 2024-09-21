@@ -3,7 +3,7 @@ import {
   prepareActiveEffectCategories
 } from "../helpers/effects.mjs";
 
-import { clampAttribute, clampValue } from "../helpers/sheet.mjs";
+import { clampAttribute, clampValue, removeFatigueItems } from "../helpers/sheet.mjs";
 import * as SABRolls from "../helpers/rolls.mjs";
 
 /**
@@ -177,6 +177,8 @@ export class SabActorSheet extends ActorSheet {
     if (this.actor.isOwner) {
       html.on("click", ".attribute-save-roll", this._onAttributeSaveRoll.bind(this));
       html.on("click", ".short-rest-roll", this._onShortRestRoll.bind(this));
+      html.on("click", ".long-rest-roll", this._onLongRestRoll.bind(this));
+      html.on("click", ".full-rest-roll", this._onFullRest.bind(this));
     }
 
     // Add Inventory Item
@@ -245,6 +247,11 @@ export class SabActorSheet extends ActorSheet {
     html.on("click", "#toggle-deprived", ev => this._onToggleDeprived(ev));
   }
 
+  /**
+   * Handle attribute save rolls.
+   * @param {Event} event The originating click event.
+   * @private
+   */
   async _onAttributeSaveRoll(event) {
     event.preventDefault();
     const element = event.currentTarget;
@@ -255,6 +262,11 @@ export class SabActorSheet extends ActorSheet {
     }
   }
 
+  /**
+   * Handle short rest rolls.
+   * @param {Event} event The originating click event.
+   * @private
+   */
   async _onShortRestRoll(event) {
     event.preventDefault();
     const element = event.currentTarget;
@@ -263,6 +275,85 @@ export class SabActorSheet extends ActorSheet {
     if (dataset) {
       SABRolls.ShortRestRoll(dataset, this.actor);
     }
+  }
+
+  /**
+   * Handle long rest rolls.
+   * @param {Event} event The originating click event.
+   * @returns {Promise<void>} A promise that resolves when the long rest action is completed.
+   * @private
+   */
+  async _onLongRestRoll(event) {
+    event.preventDefault();
+    const element = event.currentTarget;
+    const dataset = element.dataset;
+    const chatTemplate = "systems/spellburn-and-battlescars/templates/chat/default-message.hbs";
+
+    const body = this.actor.system.body;
+    const mind = this.actor.system.mind;
+
+    const bodyNeedsRest = body.value < body.max;
+    const mindNeedsRest = mind.value < mind.max;
+
+    if (bodyNeedsRest && mindNeedsRest) {
+      new Dialog({
+        title: game.i18n.localize("SAB.character.sheet.long-rest"),
+        content: `<p>${game.i18n.localize("SAB.character.sheet.long-rest-description")}</p>`,
+        buttons: {
+          body: {
+            label: game.i18n.localize("SAB.character.body.long"),
+            callback: () => SABRolls.LongRestRoll(dataset, this.actor, "body")
+          },
+          mind: {
+            label: game.i18n.localize("SAB.character.mind.long"),
+            callback: () => SABRolls.LongRestRoll(dataset, this.actor, "mind")
+          }
+        },
+        default: "body"
+      }).render(true);
+    } else if (bodyNeedsRest) {
+      return SABRolls.LongRestRoll(dataset, this.actor, "body");
+    } else if (mindNeedsRest) {
+      return SABRolls.LongRestRoll(dataset, this.actor, "mind");
+    }
+
+    removeFatigueItems(this.actor);
+
+    return ChatMessage.create({
+      speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+      content: await renderTemplate(chatTemplate, {
+        type: "long-rest",
+        message: game.i18n.localize("SAB.chat.long-rest-no-attribute-recovery")
+      })
+    });
+  }
+
+  /**
+   * Handle full rest action.
+   * @param {Event} event The originating click event.
+   * @private
+   */
+  async _onFullRest(event) {
+    event.preventDefault();
+    const chatTemplate = "systems/spellburn-and-battlescars/templates/chat/default-message.hbs";
+
+    const updates = {
+      "system.health.value": this.actor.system.health.max,
+      "system.body.value": this.actor.system.body.max,
+      "system.mind.value": this.actor.system.mind.max
+    };
+
+    removeFatigueItems(this.actor);
+
+    await this.actor.update(updates);
+
+    await ChatMessage.create({
+      speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+      content: await renderTemplate(chatTemplate, {
+        type: "full-rest",
+        message: game.i18n.localize("SAB.chat.full-rest")
+      })
+    });
   }
 
   /**

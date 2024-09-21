@@ -111,6 +111,15 @@ Handlebars.registerHelper("handleLineBreaks", function(text) {
   return new Handlebars.SafeString(text);
 });
 
+Handlebars.registerHelper("isRestDisabled", function(character) {
+  const healthFull = character.system.health.value === character.system.health.max;
+  const mindFull = character.system.mind.value === character.system.mind.max;
+  const bodyFull = character.system.body.value === character.system.body.max;
+  const noFatigue = character.items.filter(item => item.type === "item" && item.system.itemType === "fatigue").length === 0;
+
+  return healthFull && mindFull && bodyFull && noFatigue;
+});
+
 /* -------------------------------------------- */
 /*  Ready Hook                                  */
 /* -------------------------------------------- */

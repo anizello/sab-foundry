@@ -1,3 +1,5 @@
+import { removeFatigueItems } from "./sheet.mjs";
+
 /**
  * Performs an attribute save roll for a character.
  * @async
@@ -122,6 +124,82 @@ export async function ShortRestRoll(dataset, actor) {
     })
   });
 }
+
+/**
+ * Handles the long rest roll for a character.
+ * @async
+ * @param {object} dataset The dataset containing roll information.
+ * @param {Actor} actor The actor performing the long rest.
+ * @param {string} attribute The attribute to recover ('body' or 'mind').
+ * @returns {Promise<ChatMessage|null>} A promise that resolves to a ChatMessage or null.
+ */
+export async function LongRestRoll(dataset, actor, attribute) {
+  const chatTemplate = "systems/spellburn-and-battlescars/templates/chat/default-message.hbs";
+
+  let roll = new Roll(dataset.roll, actor.getRollData());
+  await roll.evaluate();
+
+  if (actor.system.attributes.isDeprived) {
+    return ChatMessage.create({
+      speaker: ChatMessage.getSpeaker({ actor: actor }),
+      content: await renderTemplate(chatTemplate, {
+        type: "deprived",
+        message: game.i18n.localize("SAB.chat.deprived")
+      })
+    });
+  }
+
+  const rollData = {
+    speaker: ChatMessage.getSpeaker({ actor: actor }),
+    rollMode: game.settings.get("core", "rollMode")
+  };
+
+  let attributeRecovered = 0;
+
+  const updateAttribute = (actor, attribute, roll) => {
+    const currentValue = actor.system[attribute].value;
+    const maxValue = actor.system[attribute].max;
+    const newValue = Math.min(currentValue + roll.total, maxValue);
+    const recovered = newValue - currentValue;
+
+    return {
+      recovered,
+      updateData: {
+        [`system.${attribute}.value`]: newValue,
+        "system.health.value": actor.system.health.max
+      }
+    };
+  };
+
+  if (attribute === "body" || attribute === "mind") {
+    const { recovered, updateData } = updateAttribute(actor, attribute, roll);
+    attributeRecovered = recovered;
+    actor.update(updateData);
+  } else {
+    console.warn(`Unexpected attribute: ${attribute}`);
+  }
+
+  removeFatigueItems(actor);
+
+  if (attributeRecovered === 0) {
+    return ChatMessage.create({
+      speaker: ChatMessage.getSpeaker({ actor: actor }),
+      content: await renderTemplate(chatTemplate, {
+        type: "long-rest",
+        message: game.i18n.localize("SAB.chat.long-rest-no-attribute-recovery")
+      })
+    });
+  }
+
+  return roll.toMessage({
+    ...rollData,
+    flavor: await renderTemplate(chatTemplate, {
+      type: "long-rest",
+      message: game.i18n.format("SAB.chat.long-rest", { attribute: game.i18n.localize(`SAB.character.${attribute}.long`), value: attributeRecovered })
+    })
+  });
+}
+
 
 /**
  * Checks if a roll result is a critical failure.

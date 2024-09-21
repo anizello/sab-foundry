@@ -93,10 +93,10 @@
         </div>
     </div>
 
-    <!-- Short Rest -->
-    <button type="button" class="short-rest-roll" data-roll="1d6+1" {{#if (eq system.health.value system.health.max)}}disabled{{/if}}>
-        <i class="fa-regular fa-face-tongue-sweat"></i>
-        {{localize "SAB.character.sheet.short-rest"}}
+    <!-- Deprived -->
+    <button id="toggle-deprived" type="button" name="system.attributes.isDeprived" {{#if system.attributes.isDeprived}}class="deprived-active"{{/if}}>
+        <i class="fa-regular fa-face-dizzy"></i>
+        {{localize "SAB.character.sheet.deprived"}}
     </button>
 </article>
 
@@ -143,12 +143,11 @@
         </div>
     </div>
 
-    <!-- Deprived -->
-    <button id="toggle-deprived" type="button" name="system.attributes.isDeprived" {{#if system.attributes.isDeprived}}class="deprived-active"{{/if}}>
-        <i class="fa-regular fa-face-dizzy"></i>
-        {{localize "SAB.character.sheet.deprived"}}
+    <!-- Short Rest -->
+    <button type="button" class="short-rest-roll" data-roll="1d6+1" {{#if (eq system.health.value system.health.max)}}disabled{{/if}}>
+        <i class="fa-regular fa-face-tongue-sweat"></i>
+        {{localize "SAB.character.sheet.short-rest"}}
     </button>
-
 </article>
 
 <!-- Luck -->
@@ -185,14 +184,21 @@
         <button
             type="button"
             title="{{localize "SAB.character.sheet.long-rest"}}"
-            {{#if (and (eq system.health.value system.health.max) (eq system.mind.value system.mind.max) (eq system.body.value system.body.max))}}disabled{{/if}}
+            class="long-rest-roll"
+            data-roll="1d6+1"
+            {{#if (isRestDisabled this)}}disabled{{/if}}
         >
-            <i class="fa-regular fa-bed"></i>
+            <i class="fa-regular fa-campfire"></i>
         </button>
 
-        <!-- Advance -->
-        <button type="button" title="{{localize "SAB.character.sheet.advance"}}">
-            <i class="fa-regular fa-star"></i>
+        <!-- Full Rest -->
+        <button
+            type="button"
+            class="full-rest-roll"
+            title="{{localize "SAB.character.sheet.full-rest"}}"
+            {{#if (isRestDisabled this)}}disabled{{/if}}
+        >
+            <i class="fa-regular fa-bed"></i>
         </button>
     </div>
 </article>

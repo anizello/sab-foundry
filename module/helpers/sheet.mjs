@@ -25,3 +25,16 @@ export function clampAttribute(value, max, min = 0, limit = 18) {
     max: clampValue(max, min, limit)
   };
 }
+
+/**
+ * Removes all fatigue items from an actor's inventory.
+ * @param {Actor} actor The actor from which to remove fatigue items.
+ * @returns {Promise<void>} A promise that resolves when the fatigue items have been removed.
+ */
+export async function removeFatigueItems(actor) {
+  const fatigueItems = actor.items.filter(item => item.type === "item" && item.system.itemType === "fatigue");
+
+  if (fatigueItems.length > 0) {
+    await actor.deleteEmbeddedDocuments("Item", fatigueItems.map(item => item.id));
+  }
+}

@@ -51,6 +51,8 @@
         },
         "short-rest": "Descanso Curto",
         "long-rest": "Descanso Longo",
+        "long-rest-description": "Escolha qual Atributo recuperar.",
+        "full-rest": "Descanso Completo",
         "advance": "Avançar",
         "attribute": {
           "label": "Atributo",
@@ -85,7 +87,10 @@
       "critical-success": "Sucesso Crítico! SORTE aumentou.",
       "save-success": "Sucesso!",
       "save-failure": "Falha!",
-      "short-rest": "Você ganhou {value} de PG com um Descanso Curto.",
+      "short-rest": "Você recuperou {value} de PG com um Descanso Curto.",
+      "long-rest": "Você recuperou {value} de {attribute} com um Descanso Longo. Você também recuperou toda PG e removeu toda Fadiga.",
+      "long-rest-no-attribute-recovery": "Você recuperou toda PG e removeu toda Fadiga.",
+      "full-rest": "Você recuperou toda PG, Atributos e removeu toda Fadiga.",
       "deprived": "Um personagem Privado não pode recuperar PG ou Atributos."
     },
     "rollNewChar": "Rolar novo personagem",

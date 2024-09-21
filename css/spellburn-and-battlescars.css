@@ -263,7 +263,7 @@
   color: #7b241c;
   background-color: #f8c9c4;
 }
-.sab-chat-attribute-save.critical-success, .sab-chat.critical-success {
+.sab-chat-attribute-save.critical-success, .sab-chat-attribute-save.long-rest, .sab-chat-attribute-save.full-rest, .sab-chat.critical-success, .sab-chat.long-rest, .sab-chat.full-rest {
   color: #196f3d;
   background-color: #c1f0d4;
 }
