@@ -101,6 +101,26 @@ Handlebars.registerHelper("handleItemWeight", function(item) {
       return `${item.name} (${item.system.weight})`;
   }
 });
+
+Handlebars.registerHelper("handleArmorValue", function(gear, character) {
+  const armorModifier = character.ar.value;
+
+  const armorItemsValueSum = gear.reduce((total, item) => {
+    if (item.type === "item" && (item.system.itemType === "armor" || item.system.itemType === "relic")) {
+      return total + (item.system.armorValue || 0);
+    }
+
+    return total;
+  }, 0);
+
+  const totalArmor = armorItemsValueSum + armorModifier;
+
+  if (totalArmor > 3) return 3;
+  if (totalArmor < 0) return 0;
+
+  return totalArmor;
+});
+
 Handlebars.registerHelper("stripTags", function(input) {
   return input.replace(/<\/?[^>]+(>|$)/g, "");
 });

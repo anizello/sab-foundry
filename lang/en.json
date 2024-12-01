@@ -49,6 +49,10 @@
           "answer-description": "Ability",
           "answer-description-placeholder": "Insert the description of the Ability here"
         },
+        "armor": {
+          "label": "Armor Modifier",
+          "text": "Add or remove Armor modifier from abilities or effects. \nArmor from items is calculated automatically. \nArmor will never be higher than 3."
+        },
         "short-rest": "Short Rest",
         "long-rest": "Long Rest",
         "long-rest-description": "Choose which Attribute to recover.",

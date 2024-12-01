@@ -18,7 +18,7 @@ export default class SabItem extends SabItemBase {
     schema.weight = new fields.NumberField({ ...requiredInteger, initial: 1});
 
     // Add armour value
-    schema.armourValue = new fields.NumberField({ ...requiredInteger, initial: 0, min: 0 });
+    schema.armorValue = new fields.NumberField({ ...requiredInteger, initial: 0, min: 0 });
 
     // Break down roll formula into three independent fields
     schema.roll = new fields.SchemaField({

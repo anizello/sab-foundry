@@ -49,6 +49,10 @@
           "answer-description": "Habilidade",
           "answer-description-placeholder": "Insira a Habilidade da Origem do seu Arquétipo aqui"
         },
+        "armor": {
+          "label": "Modificador de Armadura",
+          "text": "Adicione ou remova o modificador de Armadura de habilidades ou efeitos. \nA Armadura proveniente de itens é calculada automaticamente. \nArmadura terá um valor maior que 3."
+        },
         "short-rest": "Descanso Curto",
         "long-rest": "Descanso Longo",
         "long-rest-description": "Escolha qual Atributo recuperar.",

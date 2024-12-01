@@ -184,6 +184,9 @@ export class SabActorSheet extends ActorSheet {
     // Add Inventory Item
     html.on("click", ".item-create", this._onItemCreate.bind(this));
 
+    // Add Armor Modifiers
+    html.find(".character-armor").click(this._onArmorConfig.bind(this));
+
     // Delete Inventory Item
     html.on("click", ".item-delete", ev => {
       const li = $(ev.currentTarget).parents(".item");
@@ -781,6 +784,43 @@ export class SabActorSheet extends ActorSheet {
       default: "save"
     }).render(true);
   }
+
+  _onArmorConfig(event) {
+    event.preventDefault();
+    const armorValue = this.actor.system.ar.value;
+
+    new Dialog({
+      title: game.i18n.localize("SAB.character.armor.long"),
+      content: `
+        <form class="sheet-modal">
+          <div>
+            <label>${game.i18n.localize("SAB.character.sheet.armor.label")}</label>
+            <input type="number" name="armor" value="${armorValue}" min="-3" max="3">
+            <p class="modal-text__description">${game.i18n.localize("SAB.character.sheet.armor.text")}</p>
+          </div>
+        </form>
+      `,
+      buttons: {
+        save: {
+          icon: '<i class="fas fa-save"></i>',
+          label: game.i18n.localize("SAB.actions.save"),
+          callback: html => {
+            const form = html.find("form")[0];
+            let newValue = form.armor.value.trim() === "" ? 0 : parseInt(form.armor.value, 10);
+
+            if (newValue < -3) newValue = -3;
+            if (newValue > 3) newValue = 3;
+
+            this.actor.update({
+              "system.ar.value": newValue
+            });
+          }
+        }
+      },
+      default: "save"
+    }).render(true);
+  }
+
 
   /**
    * Toggles the deprived status of the character.

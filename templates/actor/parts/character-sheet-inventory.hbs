@@ -63,6 +63,10 @@
                         <div class="item-formula item-prop">{{item.system.formula}}</div>
                     {{/if}}
 
+                    {{#if (gt item.system.armorValue 0)}}
+                        <p>{{item.system.armorValue}} {{localize "SAB.character.armor.short"}}</p>
+                    {{/if}}
+
                     {{#if item.system.description}}
                         <p>{{handleLineBreaks item.system.description}}</p>
                     {{/if}}

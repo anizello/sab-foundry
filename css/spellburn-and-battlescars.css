@@ -21,6 +21,11 @@
   gap: 16px;
   padding: 0 0 32px;
 }
+.sheet-modal .modal-text__description {
+  white-space: pre-wrap;
+  font-style: italic;
+  color: grey;
+}
 .sheet-modal div {
   display: flex;
   flex-direction: column;
