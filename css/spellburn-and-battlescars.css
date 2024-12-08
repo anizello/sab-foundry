@@ -792,4 +792,8 @@
   min-height: 200px;
 }
 
+.system-spellburn-and-battlescars .window-app .window-header .configure-sheet {
+  display: none;
+}
+
 /*# sourceMappingURL=spellburn-and-battlescars.css.map */

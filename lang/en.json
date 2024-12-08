@@ -78,7 +78,9 @@
       "new-item": "New Item",
       "new-spell": "New Spell",
       "cast-spell": "Cast Spell",
-      "new-fatigue": "Add Fatigue"
+      "new-fatigue": "Add Fatigue",
+      "button-continue": "Continue",
+      "button-cancel": "Cancel"
     },
     "encumbrance": {
       "name": "Encumbrance",
@@ -167,7 +169,9 @@
         "armor": "Armor",
         "misc": "Misc",
         "spell": "Spell",
-        "relic": "Relic"
+        "relic": "Relic",
+        "change-type-dialog-title": "Change item's type?",
+        "change-type-dialog-description": "Changing the item's type will reset it to default values. Do you wish to continue?"
       },
       "weight": {
         "light": "Light (0)",

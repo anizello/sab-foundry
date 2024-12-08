@@ -78,7 +78,9 @@
       "new-item": "Novo Item",
       "new-spell": "Nova Magia",
       "cast-spell": "Conjurar Magia",
-      "new-fatigue": "Adicionar Fadiga"
+      "new-fatigue": "Adicionar Fadiga",
+      "button-continue": "Continuar",
+      "button-cancel": "Cancelar"
     },
     "encumbrance": {
       "name": "Carga",
@@ -167,7 +169,9 @@
         "armor": "Armadura",
         "misc": "Diversos",
         "spell": "Magia",
-        "relic": "Relíquia"
+        "relic": "Relíquia",
+        "change-type-dialog-title": "Alterar o tipo do item?",
+        "change-type-dialog-description": "Alterar o tipo do item irá redefini-lo para os valores padrão. Deseja continuar?"
       },
       "weight": {
         "light": "Leve (0)",

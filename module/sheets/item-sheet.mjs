@@ -94,12 +94,45 @@ export class SabItemSheet extends ItemSheet {
     // Item type button logic
     html.find(".item-type-button").click(ev => {
       const button = ev.currentTarget;
-      const itemType = button.dataset.itemType;
+      const newItemType = button.dataset.itemType;
 
-      this.item.update({"system.itemType": itemType});
+      if (newItemType === this.item.system.itemType) return;
 
-      html.find(".item-type-button").removeClass("active");
-      button.classList.add("active");
+      new Dialog({
+        title: game.i18n.localize("SAB.item.type.change-type-dialog-title"),
+        content: game.i18n.localize("SAB.item.type.change-type-dialog-description"),
+        buttons: {
+          confirm: {
+            icon: '<i class="fas fa-check"></i>',
+            label: game.i18n.localize("SAB.actions.button-continue"),
+            callback: html => {
+              const newValues = {
+                ...this.item.system,
+                itemType: newItemType,
+                quantity: 1,
+                weight: 1,
+                formula: "",
+                roll: {
+                  diceNum: 1,
+                  diceSize: "",
+                  diceBonus: ","
+                },
+                armorValue: 0
+              };
+
+              this.item.update({system: newValues});
+
+              html.find(".item-type-button").removeClass("active");
+              button.classList.add("active");
+            }
+          },
+          cancel: {
+            icon: '<i class="fas fa-times"></i>',
+            label: game.i18n.localize("SAB.actions.button-cancel")
+          }
+        },
+        default: "cancel"
+      }).render(true);
     });
   }
 }
