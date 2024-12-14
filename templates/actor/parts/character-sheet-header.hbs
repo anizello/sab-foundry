@@ -19,34 +19,35 @@
                 </label>
             </div>
 
-            <!-- Details -->
-            <div class="details-section">
-                <div>
-                    <input
-                        type="text"
-                        name="system.attributes.background"
-                        value="{{system.attributes.background}}"
-                        class="section-input"
-                    />
-                    <label for="system.attributes.background" class="section-label">
-                        {{localize "SAB.character.background"}}
-                    </label>
-                </div>
+            {{#if (eq actor.type "character")}}
+                <!-- Details -->
+                <div class="details-section">
+                    <div>
+                        <input
+                            type="text"
+                            name="system.attributes.background"
+                            value="{{system.attributes.background}}"
+                            class="section-input"
+                        />
+                        <label for="system.attributes.background" class="section-label">
+                            {{localize "SAB.character.background"}}
+                        </label>
+                    </div>
 
-                <div>
-                    <input
-                        type="text"
-                        name="system.attributes.archetype.name"
-                        value="{{system.attributes.archetype.name}}"
-                        class="section-input character-archetype"
-                        readonly
-                    />
-                    <label for="system.attributes.archetype.name" class="section-label">
-                        {{localize "SAB.character.archetype"}}
-                    </label>
+                    <div>
+                        <input
+                            type="text"
+                            name="system.attributes.archetype.name"
+                            value="{{system.attributes.archetype.name}}"
+                            class="section-input character-archetype"
+                            readonly
+                        />
+                        <label for="system.attributes.archetype.name" class="section-label">
+                            {{localize "SAB.character.archetype"}}
+                        </label>
+                    </div>
                 </div>
-
-            </div>
+            {{/if}}
 
             <!-- Attributes -->
             <div class="attributes-section">

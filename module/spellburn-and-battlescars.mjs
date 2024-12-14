@@ -43,7 +43,7 @@ Hooks.once("init", function() {
   // with the Character/NPC as part of super.defineSchema()
   CONFIG.Actor.dataModels = {
     character: models.SabCharacter,
-    npc: models.SabNPC
+    npc: models.SabCharacter
   };
   CONFIG.Item.documentClass = SabItem;
   CONFIG.Item.dataModels = {

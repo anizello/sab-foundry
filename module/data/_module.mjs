@@ -1,7 +1,6 @@
 // Export Actors
 export {default as SabActorBase} from "./base-actor.mjs";
 export {default as SabCharacter} from "./actor-character.mjs";
-export {default as SabNPC} from "./actor-npc.mjs";
 
 // Export Items
 export {default as SabItemBase} from "./base-item.mjs";

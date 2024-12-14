@@ -61,6 +61,7 @@ export class SabActorSheet extends ActorSheet {
     // Prepare NPC data and items.
     if (actorData.type === "npc") {
       this._prepareItems(context);
+      this._prepareCharacterData(context);
     }
 
     // Enrich biography info for display

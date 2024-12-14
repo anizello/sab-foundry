@@ -1,37 +1,39 @@
-<!-- Origin -->
-<div class="character-origin">
-    <span>
-        <input
-            type="text"
-            name="system.attributes.origin.question"
-            value="{{system.attributes.origin.question}}"
-            class="section-input"
-            readonly
-        />
-        <label for="system.attributes.origin.question" class="section-label">
-            {{localize "SAB.character.origin"}}
-        </label>
-    </span>
-
-    <span class="origin-answer-title">
-        <input
-            type="text"
-            name="system.attributes.origin.answer.title"
-            value="{{system.attributes.origin.answer.title}}"
-            class="section-input"
-            readonly
-        />
-        <label for="system.attributes.origin.answer.title" class="section-label">
-            {{localize "SAB.character.sheet.origin.answer-title"}}
-        </label>
-    </span>
-
-    {{#if system.attributes.origin.answer.description}}
-        <span class="origin-answer-description">
-            <p>{{system.attributes.origin.answer.description}}</p>
+{{#if (eq actor.type "character")}}
+    <!-- Origin -->
+    <div class="character-origin">
+        <span>
+            <input
+                type="text"
+                name="system.attributes.origin.question"
+                value="{{system.attributes.origin.question}}"
+                class="section-input"
+                readonly
+            />
+            <label for="system.attributes.origin.question" class="section-label">
+                {{localize "SAB.character.origin"}}
+            </label>
         </span>
-    {{/if}}
-</div>
+
+        <span class="origin-answer-title">
+            <input
+                type="text"
+                name="system.attributes.origin.answer.title"
+                value="{{system.attributes.origin.answer.title}}"
+                class="section-input"
+                readonly
+            />
+            <label for="system.attributes.origin.answer.title" class="section-label">
+                {{localize "SAB.character.sheet.origin.answer-title"}}
+            </label>
+        </span>
+
+        {{#if system.attributes.origin.answer.description}}
+            <span class="origin-answer-description">
+                <p>{{system.attributes.origin.answer.description}}</p>
+            </span>
+        {{/if}}
+    </div>
+{{/if}}
 
 <div class="abilities-container">
     <ol class="items-list">
