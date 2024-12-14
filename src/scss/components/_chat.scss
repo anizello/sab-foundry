@@ -35,3 +35,13 @@
     background-color: $c-failure-light;
   }
 }
+
+.chat-advance-summary {
+  padding-bottom: 8px;
+}
+
+.chat-advance-tip {
+  padding-top: 8px;
+  font-style: italic;
+  color: $c-tan;
+}

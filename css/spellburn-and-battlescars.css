@@ -281,6 +281,16 @@
   background-color: #f8d9b5;
 }
 
+.chat-advance-summary {
+  padding-bottom: 8px;
+}
+
+.chat-advance-tip {
+  padding-top: 8px;
+  font-style: italic;
+  color: #444;
+}
+
 /* Styles limited to spellburn-and-battlescars sheets */
 .spellburn-and-battlescars nav.sheet-tabs {
   display: flex;
@@ -551,10 +561,13 @@
 .spellburn-and-battlescars .new-ability-container, .spellburn-and-battlescars .new-item-container {
   margin-top: 32px;
 }
-.spellburn-and-battlescars .new-item-container {
+.spellburn-and-battlescars .new-ability-container, .spellburn-and-battlescars .new-item-container {
   display: flex;
   flex-direction: column;
   gap: 8px;
+}
+.spellburn-and-battlescars .advance-character {
+  background: rgba(0, 0, 0, 0.3);
 }
 .spellburn-and-battlescars .gold-container {
   display: flex;
@@ -792,7 +805,7 @@
   min-height: 200px;
 }
 
-.system-spellburn-and-battlescars .window-app .window-header .configure-sheet {
+.window-app .window-header .configure-sheet {
   display: none;
 }
 

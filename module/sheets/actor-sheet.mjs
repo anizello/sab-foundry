@@ -212,8 +212,8 @@ export class SabActorSheet extends ActorSheet {
     // Roll new character.
     html.on("click", ".roll-new-character", this._rollNewCharacter.bind(this));
 
-    // Level up.
-    html.on("click", ".level-up", this._levelUp.bind(this));
+    // Advance.
+    html.on("click", ".advance-character", this._advanceCharacter.bind(this));
 
     // Handle gold
     html.on("change", "#gold", ev => {
@@ -479,91 +479,76 @@ export class SabActorSheet extends ActorSheet {
     });
   }
 
-  async _levelUp() {
-    ChatMessage.create({
-      speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-      content: game.i18n.localize("SAB.levelUp.msg")
-    });
-    const messages = [
-      "SAB.Ability.Body.long",
-      "SAB.Ability.Mind.long",
-      "SAB.Ability.Luck.long"
-    ];
-    let body = 0;
-    let mind = 0;
-    let luck = 0;
-    let notLeveled = true;
+  async _advanceCharacter() {
+    new Dialog({
+      title: game.i18n.localize("SAB.advance.dialog-title"),
+      content: game.i18n.localize("SAB.advance.dialog-description"),
+      buttons: {
+        confirm: {
+          icon: '<i class="fas fa-check"></i>',
+          label: game.i18n.localize("SAB.actions.button-continue"),
+          callback: async () => {
+            const attributesToRoll = [];
+            const thresholds = {
+              body: this.actor.system.body.max,
+              mind: this.actor.system.mind.max,
+              luck: this.actor.system.attributes.luck.value
+            };
+            const results = [];
 
-    if (this.actor.system.body.max < 18) {
-      let roll = await new Roll("d20").toMessage({
-        speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-        flavor: game.i18n.localize(messages[0])
-      });
-      body = roll.rolls[0].total;
-    }
+            if (thresholds.body < 18) attributesToRoll.push({ name: game.i18n.localize("SAB.character.body.long"), max: thresholds.body });
+            if (thresholds.mind < 18) attributesToRoll.push({ name: game.i18n.localize("SAB.character.mind.long"), max: thresholds.mind });
+            if (thresholds.luck < 18) attributesToRoll.push({ name: game.i18n.localize("SAB.character.luck.long"), max: thresholds.luck });
 
-    if (this.actor.system.mind.max < 18) {
-      let roll = await new Roll("d20").toMessage({
-        speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-        flavor: game.i18n.localize(messages[1])
-      });
-      mind = roll.rolls[0].total;
-    }
+            for (const attribute of attributesToRoll) {
+              const roll = await new Roll("d20");
 
-    if (this.actor.system.attributes.luck.value < 18) {
-      let roll = await new Roll("d20").toMessage({
-        speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-        flavor: game.i18n.localize(messages[2])
-      });
-      luck = roll.rolls[0].total;
-    }
+              await roll.toMessage({
+                speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+                flavor: `${game.i18n.localize("SAB.advance.attribute-chat-message")} ${attribute.name}`
+              });
 
-    if (body > this.actor.system.body.max) {
-      notLeveled = false;
-      this.actor.update({
-        "system.body.value": this.actor.system.body.value + 1,
-        "system.body.max": this.actor.system.body.max + 1
-      });
-      ChatMessage.create({
-        speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-        content: game.i18n.localize("SAB.levelUp.body")
-      });
-    }
+              results.push({
+                name: attribute.name,
+                value: roll.total,
+                threshold: attribute.max,
+                success: roll.total > attribute.max
+              });
+            }
 
-    if (mind > this.actor.system.mind.max) {
-      notLeveled = false;
-      this.actor.update({
-        "system.mind.value": this.actor.system.mind.value + 1,
-        "system.mind.max": this.actor.system.mind.max + 1
-      });
-      ChatMessage.create({
-        speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-        content: game.i18n.localize("SAB.levelUp.mind")
-      });
-    }
+            const summary = results.map(({ name, value, threshold, success }) => {
+              const status = success ? `<strong>${game.i18n.localize("SAB.advance.roll-success")}</strong>` : "";
+              return `<li>${name}: ${value} > ${threshold} ${status}</li>`;
+            });
 
-    if (luck > this.actor.system.attributes.luck.value) {
-      notLeveled = false;
-      this.actor.update({
-        "system.attributes.luck.value": Math.floor(this.actor.system.attributes.luck.value + 1)
-      });
-      ChatMessage.create({
-        speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-        content: game.i18n.localize("SAB.levelUp.luck")
-      });
-    }
+            const allFailed = results.every(({ success }) => !success);
 
-    if (notLeveled) {
-      ChatMessage.create({
-        speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-        content: game.i18n.localize("SAB.levelUp.nothing")
-      });
-    }
+            if (allFailed) {
+              summary.push(`<li><strong>${game.i18n.localize("SAB.advance.no-advancement")}</strong></li>`);
+            }
 
-    this.actor.update({
-      "system.health.value": this.actor.system.health.value + 1,
-      "system.health.max": this.actor.system.health.max + 1
-    });
+            const summaryMessage = `
+              <h3>${game.i18n.localize("SAB.advance.attribute-chat-summary")}</h3>
+              <ul class="chat-advance-summary">${summary.join("")}</ul>
+              <div class="sab-chat success"><span>${game.i18n.localize("SAB.advance.increase-hp")}</span></div>
+              <p class="chat-advance-tip">${game.i18n.localize("SAB.advance.tip")}</p>
+            `;
+
+            setTimeout(() => {
+              ChatMessage.create({
+                speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+                content: summaryMessage
+              });
+            }, 3700); // 3.7 seconds
+          }
+        },
+        cancel: {
+          icon: '<i class="fas fa-times"></i>',
+          label: game.i18n.localize("SAB.actions.button-cancel")
+        }
+      },
+      default: "cancel"
+    }).render(true);
   }
 
   // TODO: Fix gold change bug

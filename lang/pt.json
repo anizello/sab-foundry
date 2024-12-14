@@ -124,14 +124,16 @@
       "20": "Você cria uma cópia exata de si mesmo. Um envelhece enquanto o outro rejuvenesce. Ambos a um ritmo de 1 ano por dia. Seus pensamentos são ligados, e se um morre o outro também. Apenas ajuda mágica pode lhe restaurar; após isso adicione +1d6 para cada um de seus Atributos.",
       "21": "Você se transforma em um Elemental. Crie um Nome Verdadeiro para você. Energias mágicas te cercam o tempo todo, e ataques mundanos contra você são prejudicados. Se alguém descobrir seu Nome Verdadeiro, ele pode te controlar. Outros Elementais virão atrás de você."
     },
-      "levelUp": {
-      "levelUp": "Avançar Nível",
-      "levelUpMsg": "Avançou de nível!",
-      "body": "Corpo aprimorado",
-      "mind": "Mente aprimorada",
-      "luck": "Sorte aprimorada",
-      "msg": "está subindo de nível",
-      "nothing": "Nenhum atributo aprimorado. Escolha um para subir em 1."
+    "advance": {
+      "button": "Avançar Personagem",
+      "dialog-title": "Avançar Personagem",
+      "dialog-description": "Deseja Avançar seu Personagem?",
+      "attribute-chat-message": "Está Avançando: ",
+      "attribute-chat-summary": "Resumo de Avanço",
+      "roll-success": "(Avançou)",
+      "no-advancement": "Sem Avanço de Atributo. Aumente seu Atributo mais baixo em 1.",
+      "increase-hp": "Se você aprendeu uma nova habilidade desde seu último Avanço, aumente sua PG em 1.",
+      "tip": "Atualize sua Ficha de Personagem adequadamente."
     },
     "SheetLabels": {
       "Actor": "Ficha de Ator",

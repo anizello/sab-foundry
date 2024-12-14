@@ -124,14 +124,16 @@
       "20": "You create an exact duplicate of yourself. One grows older while the other grows younger. Both age at the rate of 1 year per day. Your thoughts are joined, and if one dies so does the other. Only magical aid will restore you; afterward add +[[/r 1d6]] to each Attribute Score",
       "21": "You have become Elemental. Create a True Name for yourself. Magical energies surround you at all times, and mundane attacks against you are Impaired. If someone learns your True Name, they can control you. Other Elementals will come for you."
     },
-    "levelUp": {
-      "levelUp": "Advance Level",
-      "levelUpMsg": "Leveled Up!",
-      "body": "Body increased",
-      "mind": "Mind increased",
-      "luck": "Luck increased",
-      "msg": "is leveling up",
-      "nothing": "No attribute increased. Choose one to increase by 1."
+    "advance": {
+      "button": "Advance Character",
+      "dialog-title": "Advance Character",
+      "dialog-description": "Do you wish to Advance your Character?",
+      "attribute-chat-message": "Is Advancing: ",
+      "attribute-chat-summary": "Advancement Summary",
+      "roll-success": "(Advanced)",
+      "no-advancement": "No Attribute Advancement. Increase your lowest Attribute by 1.",
+      "increase-hp": "If you learned a new ability since your last Advancement, increase your HP by 1.",
+      "tip": "Update your Character Sheet accordingly."
     },
     "SheetLabels": {
       "Actor": "Sab Actor Sheet",
