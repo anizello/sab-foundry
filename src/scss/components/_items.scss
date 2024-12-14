@@ -150,10 +150,8 @@
 
   .item-prop {
     text-align: left;
-    border-right: $border-groove;
     font-size: $font-size-16;
-    width: fit-content;
-    padding-right: 8px;
+    font-weight: 700;
     flex-shrink: 0;
   }
 
@@ -192,3 +190,21 @@
   }
 }
 
+.inventory-container {
+  .item-description {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .item-armor-damage {
+    display: flex;
+    gap: 16px;
+  }
+}
+
+.description-divider {
+  border-bottom: $border-dashed;
+  margin: 4px 0 16px;
+  width: 100%;
+}

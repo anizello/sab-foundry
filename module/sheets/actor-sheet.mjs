@@ -206,6 +206,12 @@ export class SabActorSheet extends ActorSheet {
       onManageActiveEffect(ev, document);
     });
 
+    // Item Quantity
+    html.on("click", ".item-quantity-add", this._onItemQuantityAdd.bind(this));
+    html.on("click", ".item-quantity-remove", this._onItemQuantityRemove.bind(this));
+
+    // Remove Item Quantity
+
     // Rollable abilities.
     html.on("click", ".rollable", this._onRoll.bind(this));
 
@@ -806,6 +812,24 @@ export class SabActorSheet extends ActorSheet {
     }).render(true);
   }
 
+  _onItemQuantityAdd(event) {
+    const li = $(event.currentTarget).parents(".item");
+    const item = this.actor.items.get(li.data("itemId"));
+
+    const newQuantity = (item.system.quantity || 0) + 1;
+
+    item.update({ "system.quantity": newQuantity });
+  }
+
+
+  _onItemQuantityRemove(event) {
+    const li = $(event.currentTarget).parents(".item");
+    const item = this.actor.items.get(li.data("itemId"));
+
+    const newQuantity = item.system.quantity > 0 ? item.system.quantity - 1 : 0;
+
+    item.update({ "system.quantity": newQuantity });
+  }
 
   /**
    * Toggles the deprived status of the character.

@@ -746,10 +746,8 @@
 }
 .spellburn-and-battlescars .items-list .item-prop {
   text-align: left;
-  border-right: 2px groove #eeede0;
   font-size: 1rem;
-  width: fit-content;
-  padding-right: 8px;
+  font-weight: 700;
   flex-shrink: 0;
 }
 .spellburn-and-battlescars .items-list .items-header {
@@ -780,6 +778,20 @@
 .spellburn-and-battlescars .item-type-buttons button.active, .spellburn-and-battlescars .item-type-buttons button:hover {
   background-color: #eae9e3;
   color: #191813;
+}
+.spellburn-and-battlescars .inventory-container .item-description {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.spellburn-and-battlescars .inventory-container .item-armor-damage {
+  display: flex;
+  gap: 16px;
+}
+.spellburn-and-battlescars .description-divider {
+  border-bottom: 1px dashed #b5b3a4;
+  margin: 4px 0 16px;
+  width: 100%;
 }
 .spellburn-and-battlescars .effects .item .effect-source,
 .spellburn-and-battlescars .effects .item .effect-duration,

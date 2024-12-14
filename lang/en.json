@@ -220,10 +220,12 @@
   },
 
   "DOCUMENT":{
-    "Create": "Create",
-    "New": "New",
-    "Delete": "Delete",
-    "Edit": "Edit",
-    "Roll": "Roll"
+    "create": "Create",
+    "new": "New",
+    "delete": "Delete",
+    "edit": "Edit",
+    "roll": "Roll",
+    "add": "Add",
+    "remove": "Remove"
   }
 }

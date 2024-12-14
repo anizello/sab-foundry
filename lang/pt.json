@@ -219,10 +219,12 @@
     }
   },
   "DOCUMENT": {
-    "Create": "Criar",
-    "New": "Novo",
-    "Edit": "Editar",
-    "Delete": "Deletar",
-    "Roll": "Rolar"
+    "create": "Criar",
+    "new": "Novo",
+    "edit": "Editar",
+    "delete": "Deletar",
+    "roll": "Rolar",
+    "add": "Adiconar",
+    "remove": "Remover"
   }
 }
