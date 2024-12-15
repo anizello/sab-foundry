@@ -33,6 +33,10 @@
           "label": "Nome",
           "placeholder": "Nome do personagem"
         },
+        "description": {
+          "label": "Descrição",
+          "placeholder": "Adicione descrição"
+        },
         "archetype": {
           "label": "Nome",
           "placeholder": "Nome do Arquétipo"
@@ -66,6 +70,7 @@
         "deprived": "Privado",
         "tabs": {
           "abilities": "Habilidades",
+          "abilities-opponent": "Ataques e Habilidades",
           "inventory": "Inventário",
           "spells": "Magias",
           "notes": "Notas"
@@ -80,7 +85,8 @@
       "cast-spell": "Conjurar Magia",
       "new-fatigue": "Adicionar Fadiga",
       "button-continue": "Continuar",
-      "button-cancel": "Cancelar"
+      "button-cancel": "Cancelar",
+      "add-new": "Adicionar"
     },
     "encumbrance": {
       "name": "Carga",
@@ -181,6 +187,14 @@
         "bulky": "Volumoso (2)"
       }
     },
+    "feature": {
+      "sheet": {
+        "name-placeholder": "Nome",
+        "type": "Tipo",
+        "ability": "Habilidade",
+        "attack": "Ataque"
+      }
+    },
     "Effect": {
       "Source": "Origem",
       "TabDuration": "Duração",
@@ -208,7 +222,8 @@
   "TYPES": {
     "Actor": {
       "character": "Personagem",
-      "npc": "PNJ"
+      "npc": "PNJ, Contratado, Montaria, Familiar",
+      "opponent": "Oponente"
     },
     "Item": {
       "effect": "Efeito",

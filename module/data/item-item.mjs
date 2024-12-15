@@ -50,4 +50,5 @@ export default class SabItem extends SabItemBase {
       this.formula = roll.diceSize;
     }
   }
+
 }

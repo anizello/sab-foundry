@@ -33,6 +33,10 @@
           "label": "Name",
           "placeholder": "Character's name"
         },
+        "description": {
+          "label": "Description",
+          "placeholder": "Add description"
+        },
         "archetype": {
           "label": "Name",
           "placeholder": "Archetype's name"
@@ -66,6 +70,7 @@
         "deprived": "Deprived",
         "tabs": {
           "abilities": "Abilities",
+          "abilities-opponent": "Attacks and Abilities",
           "inventory": "Inventory",
           "spells": "Spells",
           "notes": "Notes"
@@ -80,7 +85,8 @@
       "cast-spell": "Cast Spell",
       "new-fatigue": "Add Fatigue",
       "button-continue": "Continue",
-      "button-cancel": "Cancel"
+      "button-cancel": "Cancel",
+      "add-new": "Add"
     },
     "encumbrance": {
       "name": "Encumbrance",
@@ -181,6 +187,14 @@
         "bulky": "Bulky (2)"
       }
     },
+    "feature": {
+      "sheet": {
+        "name-placeholder": "Name",
+        "type": "Type",
+        "ability": "Ability",
+        "attack": "Attack"
+      }
+    },
     "Effect": {
       "Source": "Source",
       "TabDuration": "Duration",
@@ -208,7 +222,8 @@
   "TYPES": {
     "Actor": {
       "character": "Character",
-      "npc": "NPC"
+      "npc": "NPC, Hireling, Mount, Familiar",
+      "opponent": "Opponent"
     },
     "Item": {
       "description": "Description",

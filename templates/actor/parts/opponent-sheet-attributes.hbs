@@ -40,13 +40,29 @@
             </span>
         </div>
     </div>
+</article>
 
-    <!--Armor -->
-    <div class="character-armor character-armor-modal">
-        <label for="system.ar.value" class="resource-label">{{localize "SAB.character.armor.short"}}</label>
-        <span>
-            <input class="section-input " type="text" value="{{handleArmorValue gear system}}" data-dtype="Number" readonly />
-        </span>
+<!-- Armor -->
+<article>
+    <div class="attribute character-armor-modal">
+        <header
+            class="attribute-header"
+            data-label={{localize "SAB.character.armor.long"}}
+        >
+            <h3>{{localize "SAB.character.armor.long"}}</h3>
+        </header>
+
+        <div class="attribute-content">
+            <span>
+                <input
+                    type="text"
+                    class="section-input"
+                    value="{{handleArmorValue gear system}}"
+                    data-dtype="Number"
+                    readonly
+                />
+            </span>
+        </div>
     </div>
 </article>
 
@@ -92,12 +108,6 @@
             </span>
         </div>
     </div>
-
-    <!-- Deprived -->
-    <button id="toggle-deprived" type="button" name="system.attributes.isDeprived" {{#if system.attributes.isDeprived}}class="deprived-active"{{/if}}>
-        <i class="fa-regular fa-face-dizzy"></i>
-        {{localize "SAB.character.sheet.deprived"}}
-    </button>
 </article>
 
 <!-- Mind -->
@@ -141,64 +151,5 @@
                 <label for="max_mind">{{localize "SAB.character.sheet.attribute.max"}}</label>
             </span>
         </div>
-    </div>
-
-    <!-- Short Rest -->
-    <button type="button" class="short-rest-roll" data-roll="1d6+1" {{#if (eq system.health.value system.health.max)}}disabled{{/if}}>
-        <i class="fa-regular fa-face-tongue-sweat"></i>
-        {{localize "SAB.character.sheet.short-rest"}}
-    </button>
-</article>
-
-<!-- Luck -->
-<article>
-    <div class="attribute">
-        <header
-            class="attribute-header attribute-save-roll"
-            data-roll="d20"
-            data-attribute="luck"
-            data-label={{localize "SAB.character.luck.long"}}
-        >
-            <h3>{{localize "SAB.character.luck.long"}}</h3>
-        </header>
-
-        <div class="attribute-content">
-            <span>
-                <input
-                    id="current_luck"
-                    type="text"
-                    name="system.attributes.luck.value"
-                    class="section-input"
-                    value="{{system.attributes.luck.value}}"
-                    data-dtype="Number"
-                    min="0"
-                    max="18"
-                />
-                <label for="max_luck">{{localize "SAB.character.sheet.attribute.max"}}</label>
-            </span>
-        </div>
-    </div>
-
-    <div class="character-actions">
-        <!-- Long Rest -->
-        <button
-            type="button"
-            title="{{localize "SAB.character.sheet.long-rest"}}"
-            class="long-rest-roll"
-            data-roll="1d6+1"
-            {{#if (isRestDisabled this)}}disabled{{/if}}
-        >
-            <i class="fa-regular fa-campfire"></i>
-        </button>
-
-        <!-- Full Rest -->
-        <button
-            type="button"
-            class="full-rest-roll"
-            title="{{localize "SAB.character.sheet.full-rest"}}"
-            {{#if (isRestDisabled this)}}disabled{{/if}}
-        >
-            <i class="fa-regular fa-bed"></i>
-        </button>
     </div>
 </article>

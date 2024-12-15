@@ -1,0 +1,33 @@
+<form class="{{cssClass}} {{actor.type}} flexcol" autocomplete="off">
+    {{!-- Sheet Header --}}
+    <header class="sheet-header">
+        {{> "systems/spellburn-and-battlescars/templates/actor/parts/opponent-sheet-header.hbs"}}
+    </header>
+
+  {{!-- Sheet Tab Navigation --}}
+  <nav class="sheet-tabs tabs" data-group="primary">
+    {{!-- Default tab is specified in actor-sheet.mjs --}}
+    <a class="item" data-tab="features">{{localize 'SAB.character.sheet.tabs.abilities-opponent'}}</a>
+    <a class="item" data-tab="spells">{{localize 'SAB.character.sheet.tabs.spells'}}</a>
+    <a class="item" data-tab="description">{{localize 'SAB.character.sheet.tabs.notes'}}</a>
+  </nav>
+
+  {{!-- Sheet Body --}}
+  <section class="sheet-body">
+    {{!-- Owned Abilities Tab --}}
+    <div class="tab features" data-group="primary" data-tab="features">
+      {{> "systems/spellburn-and-battlescars/templates/actor/parts/character-sheet-abilities.hbs"}}
+    </div>
+
+    {{!-- Owned Spells Tab --}}
+    <div class="tab spells" data-group="primary" data-tab="spells">
+      {{> "systems/spellburn-and-battlescars/templates/actor/parts/character-sheet-spells.hbs"}}
+    </div>
+
+    {{!-- Biography Tab --}}
+    <div class="tab biography" data-group="primary" data-tab="description">
+      {{!-- Editors must receive enriched text data from getData to properly handle rolls --}}
+      {{editor enrichedBiography target="system.biography" engine="prosemirror" button=true editable=editable}}
+    </div>
+  </section>
+</form>

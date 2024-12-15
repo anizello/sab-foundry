@@ -1,0 +1,42 @@
+<section>
+    <div class="image">
+        <img src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="100" width="100"/>
+    </div>
+
+    <div class="container">
+        <main>
+            <!-- Name -->
+            <div class="name-section">
+                <input
+                    name="name"
+                    type="text"
+                    class="section-input"
+                    value="{{actor.name}}"
+                    placeholder="{{localize 'SAB.character.sheet.name.placeholder'}}"
+                />
+                <label for="name" class="section-label">
+                    {{localize "SAB.character.sheet.name.label"}}
+                </label>
+            </div>
+
+            <!-- Description -->
+            <div>
+                <input
+                    name="system.description"
+                    type="text"
+                    class="section-input"
+                    value="{{system.description}}"
+                    placeholder="{{localize 'SAB.character.sheet.description.placeholder'}}"
+                />
+                <label for="description" class="section-label">
+                    {{localize "SAB.character.sheet.description.label"}}
+                </label>
+            </div>
+
+            <!-- Attributes -->
+            <div class="attributes-section">
+                {{> "systems/spellburn-and-battlescars/templates/actor/parts/opponent-sheet-attributes.hbs"}}
+            </div>
+        </main>
+    </div>
+</section>

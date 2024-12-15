@@ -419,6 +419,7 @@
 }
 .spellburn-and-battlescars .sheet-header .container main .name-section input {
   font-size: 1.5rem;
+  padding-bottom: 8px;
 }
 .spellburn-and-battlescars .sheet-header .container main .details-section {
   display: flex;
@@ -549,8 +550,11 @@
   background-color: #eae9e3;
   border-radius: 4px;
 }
-.spellburn-and-battlescars .abilities-container {
+.spellburn-and-battlescars .character .abilities-container {
   padding: 16px 0px;
+}
+.spellburn-and-battlescars .opponent .abilities-container, .spellburn-and-battlescars .npc .abilities-container {
+  padding-bottom: 16px;
 }
 .spellburn-and-battlescars .inventory-container {
   padding: 16px 0px;
@@ -566,7 +570,7 @@
   flex-direction: column;
   gap: 8px;
 }
-.spellburn-and-battlescars .advance-character {
+.spellburn-and-battlescars .advance-character, .spellburn-and-battlescars [data-item-type=fatigue] {
   background: rgba(0, 0, 0, 0.3);
 }
 .spellburn-and-battlescars .gold-container {
@@ -779,12 +783,12 @@
   background-color: #eae9e3;
   color: #191813;
 }
-.spellburn-and-battlescars .inventory-container .item-description {
+.spellburn-and-battlescars .abilities-container .item-description, .spellburn-and-battlescars .inventory-container .item-description {
   display: flex;
   flex-direction: column;
   gap: 0;
 }
-.spellburn-and-battlescars .inventory-container .item-armor-damage {
+.spellburn-and-battlescars .abilities-container .item-armor-damage, .spellburn-and-battlescars .inventory-container .item-armor-damage {
   display: flex;
   gap: 16px;
 }

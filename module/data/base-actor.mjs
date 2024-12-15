@@ -27,6 +27,7 @@ export default class SabActorBase extends SabDataModel {
     });
 
     schema.biography = new fields.StringField({ required: true, blank: true });
+    schema.description = new fields.StringField({ required: false, blank: true, initial: "" });
 
     return schema;
   }

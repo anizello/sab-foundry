@@ -10,7 +10,9 @@ export const preloadHandlebarsTemplates = async function() {
     "systems/spellburn-and-battlescars/templates/actor/parts/character-sheet-header.hbs",
     "systems/spellburn-and-battlescars/templates/actor/parts/character-sheet-abilities.hbs",
     "systems/spellburn-and-battlescars/templates/actor/parts/character-sheet-inventory.hbs",
-    "systems/spellburn-and-battlescars/templates/actor/parts/character-sheet-spells.hbs"
+    "systems/spellburn-and-battlescars/templates/actor/parts/character-sheet-spells.hbs",
+    "systems/spellburn-and-battlescars/templates/actor/parts/opponent-sheet-attributes.hbs",
+    "systems/spellburn-and-battlescars/templates/actor/parts/opponent-sheet-header.hbs"
   ]);
 };
 

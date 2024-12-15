@@ -43,7 +43,8 @@ Hooks.once("init", function() {
   // with the Character/NPC as part of super.defineSchema()
   CONFIG.Actor.dataModels = {
     character: models.SabCharacter,
-    npc: models.SabCharacter
+    npc: models.SabCharacter,
+    opponent: models.SabActorBase
   };
   CONFIG.Item.documentClass = SabItem;
   CONFIG.Item.dataModels = {
@@ -63,6 +64,7 @@ Hooks.once("init", function() {
     makeDefault: true,
     label: "SAB.SheetLabels.Actor"
   });
+
   Items.unregisterSheet("core", ItemSheet);
   Items.registerSheet("spellburn-and-battlescars", SabItemSheet, {
     makeDefault: true,
@@ -138,6 +140,11 @@ Handlebars.registerHelper("isRestDisabled", function(character) {
   const noFatigue = character.items.filter(item => item.type === "item" && item.system.itemType === "fatigue").length === 0;
 
   return healthFull && mindFull && bodyFull && noFatigue;
+});
+
+Handlebars.registerHelper("log", function(context) {
+  console.log(context);
+  return "";
 });
 
 /* -------------------------------------------- */

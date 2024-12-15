@@ -64,6 +64,12 @@ export class SabActorSheet extends ActorSheet {
       this._prepareCharacterData(context);
     }
 
+    // Prepare Opponent data and items.
+    if (actorData.type === "opponent") {
+      this._prepareItems(context);
+      this._prepareCharacterData(context);
+    }
+
     // Enrich biography info for display
     // Enrichment turns text like `[[/r 1d20]]` into buttons
     context.enrichedBiography = await TextEditor.enrichHTML(
@@ -107,7 +113,10 @@ export class SabActorSheet extends ActorSheet {
       context.system.mind.max
     );
 
-    context.system.attributes.luck.value = clampValue(context.system.attributes.luck.value);
+    if (context.system.attributes?.luck?.value) {
+      context.system.attributes.luck.value = clampValue(context.system.attributes.luck.value);
+    }
+
     context.system.ar.value = clampValue(context.system.ar.value, 0, 3);
   }
 
@@ -186,7 +195,7 @@ export class SabActorSheet extends ActorSheet {
     html.on("click", ".item-create", this._onItemCreate.bind(this));
 
     // Add Armor Modifiers
-    html.find(".character-armor").click(this._onArmorConfig.bind(this));
+    html.find(".character-armor-modal").click(this._onArmorConfig.bind(this));
 
     // Delete Inventory Item
     html.on("click", ".item-delete", ev => {
@@ -409,7 +418,10 @@ export class SabActorSheet extends ActorSheet {
 
     // Finally, create the item!
     await Item.create(itemData, { parent: this.actor });
-    this._checkInvSlots();
+
+    if (this.actor.type !== "opponent" && data.itemType === "item") {
+      this._checkInvSlots();
+    }
   }
 
   /**
@@ -570,38 +582,46 @@ export class SabActorSheet extends ActorSheet {
   }
 
   async _rollSpell(spell) {
-    let maxBasePower = this._checkInvSlots();
+    let maxBasePower = this.actor.type === "opponent" ? 5 : this._checkInvSlots();
+
     let powerLevel = await this._getPowerLevel(maxBasePower);
+
     if (powerLevel <= 0) {
       return ChatMessage.create({
         speaker: ChatMessage.getSpeaker({ actor: this.actor }),
         content: game.i18n.localize("SAB.item.spell.no-slots")
       });
     }
+
     let roll = await new Roll(`${powerLevel}d6`).toMessage({
       speaker: ChatMessage.getSpeaker({ actor: this.actor }),
       flavor: `[${spell.type}] ${spell.name}: ${spell.system.description}`,
       rollMode: game.settings.get("core", "rollMode")
     });
+
     let rollDice = roll.rolls[0].dice[0].results.map(result => result.result);
     let uniqueRolls = new Set(rollDice);
+
     if (uniqueRolls.size < rollDice.length) {
-      let total=roll.rolls[0].total;
-      if (total>21) {total=21;}
+      let total = roll.rolls[0].total;
+      if (total > 21) { total = 21; }
       ChatMessage.create({
         flavor: game.i18n.localize("SAB.Spellburn.flavor"),
         speaker: ChatMessage.getSpeaker({ actor: this.actor }),
         content: game.i18n.localize(`SAB.Spellburn.${total}`)
       });
     }
-    await this._checkFatigue(rollDice);
+
+    if (this.actor.type !== "opponent") {
+      await this._checkFatigue(rollDice);
+    }
   }
 
   async _getPowerLevel(maxBasePower) {
-    const items = this.actor.items.filter(item => item.type === "item");
-    const totalWeight = items.reduce((sum, item) => sum + (item.system.weight || 0), 0);
-    let availableSlots = this.actor.system.attributes.invSlots.value - totalWeight;
-    availableSlots = Math.min(availableSlots, 5);
+    const isOpponent = this.actor.type === "opponent";
+    let availableSlots = isOpponent
+      ? 5
+      : Math.min(this.actor.system.attributes.invSlots.value - this.actor.items.filter(item => item.type === "item").reduce((sum, item) => sum + (item.system.weight || 0), 0), 5);
 
     let options = "";
     if (availableSlots === 0) {
