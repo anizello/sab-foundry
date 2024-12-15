@@ -43,7 +43,7 @@
   "socket": false,
   "manifest": "#{MANIFEST}#",
   "download": "#{DOWNLOAD}#",
-  "gridDistance": 5,
-  "gridUnits": "m",
+  "grid.distance": 5,
+  "grid.units": "m",
   "primaryTokenAttribute": "health"
 }
