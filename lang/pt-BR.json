@@ -225,12 +225,13 @@
       "npc": "PNJ, Contratado, Montaria, Familiar",
       "opponent": "Oponente"
     },
+
     "Item": {
       "effect": "Efeito",
       "description": "Descrição",
       "item": "Item",
-      "feature": "Recurso",
-      "spell": "Feitiço"
+      "feature": "Habilidade",
+      "spell": "Magia"
     }
   },
   "DOCUMENT": {

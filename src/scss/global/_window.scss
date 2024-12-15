@@ -7,6 +7,36 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.system-spellburn-and-battlescars {
+  .window-app .window-header .configure-sheet {
+    display: none;
+  }
+
+  .window-app.dialog {
+    width: 360px !important;
+    height: fit-content !important;
+
+    .dialog-buttons {
+      margin-top: 16px;
+      flex: 0;
+    }
+  }
+
+  #document-create {
+    .form-group {
+      flex-direction: column;
+      align-items: flex-start;
+      margin: 0 0 8px;
+      gap: 4px;
+
+      .form-fields {
+        width: 100%;
+      }
+    }
+
+  }
+}
+
 .rollable, .attribute-save-roll {
   &:hover,
   &:focus {

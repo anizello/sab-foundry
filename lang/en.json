@@ -225,11 +225,12 @@
       "npc": "NPC, Hireling, Mount, Familiar",
       "opponent": "Opponent"
     },
+
     "Item": {
       "description": "Description",
       "effect": "Effect",
       "item": "Item",
-      "feature": "Feature",
+      "feature": "Ability",
       "spell": "Spell"
     }
   },

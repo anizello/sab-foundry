@@ -6,6 +6,10 @@
     {
       "name": "Vandrulfr",
       "discord": "vandrulfr"
+    },
+    {
+      "name": "Beorhol",
+      "discord": "beorhol"
     }
   ],
   "url": "#{URL}#",
@@ -33,9 +37,9 @@
       "path": "lang/en.json"
     },
     {
-      "lang": "pt",
-      "name": "Portuguese",
-      "path": "lang/pt.json"
+      "lang": "pt-BR",
+      "name": "Português (Brasil)",
+      "path": "lang/pt-BR.json"
     }
   ],
   "packs": [],
@@ -43,7 +47,5 @@
   "socket": false,
   "manifest": "#{MANIFEST}#",
   "download": "#{DOWNLOAD}#",
-  "grid.distance": 5,
-  "grid.units": "m",
   "primaryTokenAttribute": "health"
 }

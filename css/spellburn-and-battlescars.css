@@ -9,6 +9,27 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.system-spellburn-and-battlescars .window-app .window-header .configure-sheet {
+  display: none;
+}
+.system-spellburn-and-battlescars .window-app.dialog {
+  width: 360px !important;
+  height: fit-content !important;
+}
+.system-spellburn-and-battlescars .window-app.dialog .dialog-buttons {
+  margin-top: 16px;
+  flex: 0;
+}
+.system-spellburn-and-battlescars #document-create .form-group {
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 0 0 8px;
+  gap: 4px;
+}
+.system-spellburn-and-battlescars #document-create .form-group .form-fields {
+  width: 100%;
+}
+
 .rollable:hover, .rollable:focus, .attribute-save-roll:hover, .attribute-save-roll:focus {
   color: #000;
   text-shadow: 0 0 10px red;
@@ -815,14 +836,10 @@
   min-height: 400px;
 }
 
-.spellburn-and-battlescars.sheet.item {
+.sheet.item {
   min-width: 400px;
   max-width: 600px;
   min-height: 200px;
-}
-
-.window-app .window-header .configure-sheet {
-  display: none;
 }
 
 /*# sourceMappingURL=spellburn-and-battlescars.css.map */
