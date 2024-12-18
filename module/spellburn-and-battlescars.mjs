@@ -6,7 +6,7 @@ import { SabActorSheet } from "./sheets/actor-sheet.mjs";
 import { SabItemSheet } from "./sheets/item-sheet.mjs";
 // Import helper/utility classes and constants.
 import { preloadHandlebarsTemplates, prefetchFonts } from "./helpers/templates.mjs";
-import { SAB } from "./helpers/config.mjs";
+import { SAB, IMAGES } from "./helpers/config.mjs";
 // Import DataModel classes
 import * as models from "./data/_module.mjs";
 
@@ -147,13 +147,68 @@ Handlebars.registerHelper("log", function(context) {
   return "";
 });
 
+Handlebars.registerHelper("renderIcon", function(type, className) {
+  let image = IMAGES.inventory.typesMenu.misc;
+
+  switch (type) {
+    case "weapon":
+      image = IMAGES.inventory.typesMenu.weapon;
+      break;
+    case "armor":
+      image = IMAGES.inventory.typesMenu.armor;
+      break;
+    case "item":
+      image = IMAGES.inventory.typesMenu.misc;
+      break;
+    case "spell":
+      image = IMAGES.inventory.typesMenu.spell;
+      break;
+    case "relic":
+      image = IMAGES.inventory.typesMenu.relic;
+      break;
+  }
+
+  const iconClass = className || "";
+
+  return new Handlebars.SafeString(
+    `<img src="${Handlebars.escapeExpression(image)}" class="${iconClass}" />`
+  );
+});
+
 /* -------------------------------------------- */
 /*  Ready Hook                                  */
 /* -------------------------------------------- */
 
 Hooks.once("ready", function() {
   // Wait to register hotbar drop hook on ready so that modules could register earlier if they want to
-  Hooks.on("hotbarDrop", (bar, data, slot) => createItemMacro(data, slot));
+  Hooks.on("hotbarDrop", (_, data, slot) => createItemMacro(data, slot));
+
+  Hooks.on("preCreateItem", (item, data) => {
+    let image = "";
+
+    if (item.img !== "") return;
+
+    switch (item.type) {
+      case "item":
+        image = IMAGES.item.types.item;
+        break;
+      case "feature":
+        image = IMAGES.item.types.feature;
+        break;
+      case "spell":
+        image = IMAGES.item.types.spell;
+        break;
+      default:
+        image = IMAGES.item.types.default;
+    }
+
+    const updatedData = foundry.utils.mergeObject(data, {
+      img: image
+    });
+
+    item.updateSource(updatedData);
+  });
+
 });
 
 /* -------------------------------------------- */

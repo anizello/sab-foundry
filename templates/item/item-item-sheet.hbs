@@ -8,19 +8,19 @@
 
             <div class="item-type-buttons">
                 <button class="item-type-button {{#if (eq item.system.itemType 'weapon')}}active{{/if}}" data-item-type="weapon" title="{{localize 'SAB.item.type.weapon'}}">
-                    <i class="fas fa-sword"></i>
+                    {{renderIcon "weapon"}}
                 </button>
                 <button class="item-type-button {{#if (eq item.system.itemType 'armor')}}active{{/if}}" data-item-type="armor" title="{{localize 'SAB.item.type.armor'}}">
-                    <i class="fas fa-shield-alt"></i>
+                    {{renderIcon "armor"}}
                 </button>
                 <button class="item-type-button {{#if (eq item.system.itemType 'misc')}}active{{/if}}" data-item-type="misc" title="{{localize 'SAB.item.type.misc'}}">
-                    <i class="fas fa-box"></i>
+                    {{renderIcon "misc"}}
                 </button>
                 <button class="item-type-button {{#if (eq item.system.itemType 'spell')}}active{{/if}}" data-item-type="spell" title="{{localize 'SAB.item.type.spell'}}">
-                    <i class="fas fa-magic"></i>
+                    {{renderIcon "spell"}}
                 </button>
                 <button class="item-type-button {{#if (eq item.system.itemType 'relic')}}active{{/if}}" data-item-type="relic" title="{{localize 'SAB.item.type.relic'}}">
-                    <i class="fas fa-gem"></i>
+                    {{renderIcon "relic"}}
                 </button>
             </div>
 

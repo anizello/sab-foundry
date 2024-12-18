@@ -177,16 +177,31 @@
 
 .item-type-buttons {
   display: flex;
-  flex-direction: row;
   gap: 4px;
 
   button {
-    height: 38px;
+    flex-direction: column;
+    gap: 4px;
+    height: auto;
+    padding: 4px;
 
     &.active, &:hover {
       background-color: $c-light-gray;
       color: $c-dark;
     }
+
+    img {
+      height: auto;
+      width: auto;
+      max-width: none;
+      margin: 0;
+      padding: 0;
+      border: none;
+      border-radius: 0;
+      flex: none;
+      max-width: 20px;
+      width: 100%;
+  }
   }
 }
 

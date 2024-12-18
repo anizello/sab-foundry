@@ -794,15 +794,29 @@
 }
 .spellburn-and-battlescars .item-type-buttons {
   display: flex;
-  flex-direction: row;
   gap: 4px;
 }
 .spellburn-and-battlescars .item-type-buttons button {
-  height: 38px;
+  flex-direction: column;
+  gap: 4px;
+  height: auto;
+  padding: 4px;
 }
 .spellburn-and-battlescars .item-type-buttons button.active, .spellburn-and-battlescars .item-type-buttons button:hover {
   background-color: #eae9e3;
   color: #191813;
+}
+.spellburn-and-battlescars .item-type-buttons button img {
+  height: auto;
+  width: auto;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  flex: none;
+  max-width: 20px;
+  width: 100%;
 }
 .spellburn-and-battlescars .abilities-container .item-description, .spellburn-and-battlescars .inventory-container .item-description {
   display: flex;

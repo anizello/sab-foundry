@@ -1,3 +1,5 @@
+import { IMAGES } from "../helpers/config.mjs";
+
 import {
   onManageActiveEffect,
   prepareActiveEffectCategories
@@ -120,7 +122,9 @@ export class SabItemSheet extends ItemSheet {
                 armorValue: 0
               };
 
-              this.item.update({system: newValues});
+              const image = IMAGES.inventory.types[newItemType];
+
+              this.item.update({ img: image, system: newValues });
 
               html.find(".item-type-button").removeClass("active");
               button.classList.add("active");
