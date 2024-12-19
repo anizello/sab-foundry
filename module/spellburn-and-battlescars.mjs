@@ -186,7 +186,7 @@ Hooks.once("ready", function() {
   Hooks.on("preCreateItem", (item, data) => {
     let image = "";
 
-    if (item.img !== "") return;
+    if (item.img !== "icons/svg/item-bag.svg") return;
 
     switch (item.type) {
       case "item":
