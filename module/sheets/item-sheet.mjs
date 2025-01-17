@@ -117,7 +117,7 @@ export class SabItemSheet extends ItemSheet {
                 roll: {
                   diceNum: 1,
                   diceSize: "",
-                  diceBonus: ","
+                  diceBonus: ""
                 },
                 armorValue: 0
               };
