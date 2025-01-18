@@ -266,6 +266,66 @@ export class SabActorSheet extends ActorSheet {
     html.on("click", "#toggle-deprived", ev => this._onToggleDeprived(ev));
   }
 
+  /** @override */
+  _getHeaderButtons() {
+    const buttons = super._getHeaderButtons();
+
+    if (game.user.isGM) {
+      buttons.unshift({
+        label: game.i18n.localize("SAB.character.sheet.type.header-label"),
+        class: "configure-actor-type",
+        icon: "fas fa-user-edit",
+        onclick: () => this._onConfigureActorType()
+      });
+    }
+
+    return buttons;
+  }
+
+  _onConfigureActorType() {
+    const types = {
+      character: game.i18n.localize("TYPES.Actor.character"),
+      npc: game.i18n.localize("TYPES.Actor.npc"),
+      opponent: game.i18n.localize("TYPES.Actor.opponent")
+    };
+
+    const html = `
+      <form>
+        <div class="form-group">
+          <label>${game.i18n.localize("SAB.character.sheet.type.header-label")}</label>
+          <select name="actorType">
+            ${Object.entries(types).map(([type, label]) => `
+              <option value="${type}" ${this.actor.type === type ? "selected" : ""}>
+                ${label}
+              </option>
+            `).join("")}
+          </select>
+        </div>
+      </form>
+    `;
+
+    new Dialog({
+      title: game.i18n.localize("SAB.character.sheet.type.header-modal-label"),
+      content: html,
+      buttons: {
+        save: {
+          icon: '<i class="fas fa-save"></i>',
+          label: game.i18n.localize("SAB.actions.save"),
+          callback: html => {
+            const form = html.find("form")[0];
+            const newType = form.actorType.value;
+            this.actor.update({ type: newType });
+          }
+        },
+        cancel: {
+          icon: '<i class="fas fa-times"></i>',
+          label: game.i18n.localize("SAB.actions.button-cancel")
+        }
+      },
+      default: "save"
+    }).render(true);
+  }
+
   /**
    * Handle attribute save rolls.
    * @param {Event} event The originating click event.

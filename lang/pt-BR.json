@@ -74,6 +74,10 @@
           "inventory": "Inventário",
           "spells": "Magias",
           "notes": "Notas"
+        },
+        "type": {
+          "header-label": "Tipo",
+          "header-modal-label": "Mudar Tipo do Personagem"
         }
       }
     },

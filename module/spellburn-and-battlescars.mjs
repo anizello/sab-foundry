@@ -44,7 +44,7 @@ Hooks.once("init", function() {
   CONFIG.Actor.dataModels = {
     character: models.SabCharacter,
     npc: models.SabCharacter,
-    opponent: models.SabActorBase
+    opponent: models.SabCharacter
   };
   CONFIG.Item.documentClass = SabItem;
   CONFIG.Item.dataModels = {

@@ -74,6 +74,10 @@
           "inventory": "Inventory",
           "spells": "Spells",
           "notes": "Notes"
+        },
+        "type": {
+          "header-label": "Type",
+          "header-modal-label": "Change Actor Type"
         }
       }
     },
