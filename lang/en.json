@@ -55,7 +55,9 @@
         },
         "armor": {
           "label": "Armor Modifier",
-          "text": "Add or remove Armor modifier from abilities or effects. \nArmor from items is calculated automatically. \nArmor will never be higher than 3."
+          "text": "Add or remove Armor modifier from abilities or effects. \nArmor from items is calculated automatically. \nArmor will never be higher than 3.",
+          "description-label": "Armor Description",
+          "description-placeholder": "Add Armor description"
         },
         "short-rest": "Short Rest",
         "long-rest": "Long Rest",

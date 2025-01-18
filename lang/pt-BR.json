@@ -55,7 +55,9 @@
         },
         "armor": {
           "label": "Modificador de Armadura",
-          "text": "Adicione ou remova o modificador de Armadura de habilidades ou efeitos. \nA Armadura proveniente de itens é calculada automaticamente. \nArmadura terá um valor maior que 3."
+          "text": "Adicione ou remova o modificador de Armadura de habilidades ou efeitos. \nA Armadura proveniente de itens é calculada automaticamente. \nArmadura nunca terá um valor maior que 3.",
+          "description-label": "Descrição de Armadura",
+          "description-placeholder": "Adicione a descrição da Armadura"
         },
         "short-rest": "Descanso Curto",
         "long-rest": "Descanso Longo",

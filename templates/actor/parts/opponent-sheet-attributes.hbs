@@ -55,12 +55,16 @@
         <div class="attribute-content">
             <span>
                 <input
+                    id="armor-value"
                     type="text"
                     class="section-input"
                     value="{{handleArmorValue gear system}}"
                     data-dtype="Number"
                     readonly
                 />
+                {{#if system.ar.description}}
+                    <label for="armor-value">{{system.ar.description}}</label>
+                {{/if}}
             </span>
         </div>
     </div>

@@ -860,6 +860,7 @@ export class SabActorSheet extends ActorSheet {
   _onArmorConfig(event) {
     event.preventDefault();
     const armorValue = this.actor.system.ar.value;
+    const armorDescription = this.actor.system.ar.description;
 
     new Dialog({
       title: game.i18n.localize("SAB.character.armor.long"),
@@ -867,8 +868,11 @@ export class SabActorSheet extends ActorSheet {
         <form class="sheet-modal">
           <div>
             <label>${game.i18n.localize("SAB.character.sheet.armor.label")}</label>
-            <input type="number" name="armor" value="${armorValue}" min="-3" max="3">
+            <input type="number" name="armor" value="${armorValue}" min="-3" max="3" />
             <p class="modal-text__description">${game.i18n.localize("SAB.character.sheet.armor.text")}</p>
+            <br />
+            <label>${game.i18n.localize("SAB.character.sheet.armor.description-label")}</label>
+            <input type="text" name="armorDescription" value="${armorDescription}" placeholder="${game.i18n.localize("SAB.character.sheet.armor.description-placeholder")}" />
           </div>
         </form>
       `,
@@ -879,12 +883,14 @@ export class SabActorSheet extends ActorSheet {
           callback: html => {
             const form = html.find("form")[0];
             let newValue = form.armor.value.trim() === "" ? 0 : parseInt(form.armor.value, 10);
+            const newDescription = form.armorDescription.value.trim();
 
             if (newValue < -3) newValue = -3;
             if (newValue > 3) newValue = 3;
 
             this.actor.update({
-              "system.ar.value": newValue
+              "system.ar.value": newValue,
+              "system.ar.description": newDescription
             });
           }
         }
